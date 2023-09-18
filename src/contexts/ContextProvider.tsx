@@ -9,6 +9,13 @@ import { AutoConnectProvider, useAutoConnect } from './AutoConnectProvider';
 import { notify } from "../utils/notifications";
 import { NetworkConfigurationProvider, useNetworkConfiguration } from './NetworkConfigurationProvider';
 import dynamic from "next/dynamic";
+import {
+    PhantomWalletAdapter,
+    BackpackWalletAdapter,
+    SolflareWalletAdapter,
+    CoinbaseWalletAdapter,
+    GlowWalletAdapter,
+  } from '@solana/wallet-adapter-wallets';
 
 const ReactUIWalletModalProviderDynamic = dynamic(
   async () =>
@@ -26,7 +33,12 @@ const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
     const wallets = useMemo(
         () => [
-            new UnsafeBurnerWalletAdapter(),
+            new PhantomWalletAdapter(),
+            new BackpackWalletAdapter(),
+            new SolflareWalletAdapter(),
+            new CoinbaseWalletAdapter(),
+            new GlowWalletAdapter(),
+
         ],
         [network]
     );
